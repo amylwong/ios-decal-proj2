@@ -350,6 +350,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="guesses" destination="X3u-tz-Euh" id="i3w-59-mks"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7b-6V-uc9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

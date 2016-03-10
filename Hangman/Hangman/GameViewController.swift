@@ -10,18 +10,38 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var guesses: UILabel!
+    var phrase = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         let hangmanPhrases = HangmanPhrases()
-        var phrase = hangmanPhrases.getRandomPhrase()
+        phrase = hangmanPhrases.getRandomPhrase()
         print(phrase)
+        self.guesses.text = phrase
+        guesses.font = UIFont.systemFontOfSize(36)
+        setGuessState()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setGuessState() {
+        var guessState = ""
+        for i in phrase.characters {
+            if (i == " ") {
+                guessState += ("  ")
+            } else {
+                guessState += ("-")
+            }
+        }
+        print(guessState)
+        self.guesses.text = guessState
+        
     }
     
 
