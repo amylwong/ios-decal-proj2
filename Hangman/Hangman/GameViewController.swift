@@ -12,6 +12,8 @@ class GameViewController: UIViewController {
 
     @IBOutlet weak var guesses: UILabel!
     var phrase = ""
+    @IBOutlet weak var AButton: UIButton!
+    var charactersUsed: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +23,9 @@ class GameViewController: UIViewController {
         phrase = hangmanPhrases.getRandomPhrase()
         print(phrase)
         self.guesses.text = phrase
-        guesses.font = UIFont.systemFontOfSize(36)
-        setGuessState()
+        guesses.font = UIFont.systemFontOfSize(24)
+        setUpCharacterGuessing()
+        setGuessState("")
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,12 +33,14 @@ class GameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setGuessState() {
+    func setGuessState(character: String) {
         var guessState = ""
         for i in phrase.characters {
-            if (i == " ") {
+            if (String(i) == " ") {
                 guessState += ("  ")
-            } else {
+            } else if (character == String(i)) {
+                guessState += character
+            }else {
                 guessState += ("-")
             }
         }
@@ -44,6 +49,17 @@ class GameViewController: UIViewController {
         
     }
     
+    func setUpCharacterGuessing() {
+        AButton.addTarget(self, action: "guessA", forControlEvents: .TouchUpInside)
+    }
+    
+    func guessA(){
+        charactersUsed.append("A")
+        print(charactersUsed)
+        setGuessState("A")
+    }
+    
+
 
     /*
     // MARK: - Navigation

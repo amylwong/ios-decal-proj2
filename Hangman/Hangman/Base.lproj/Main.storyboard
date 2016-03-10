@@ -270,8 +270,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="hangman1.gif" translatesAutoresizingMaskIntoConstraints="NO" id="3Bz-ag-spM">
                                 <rect key="frame" x="134" y="67" width="333" height="178"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3u-tz-Euh">
-                                <rect key="frame" x="81" y="289" width="439" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3u-tz-Euh">
+                                <rect key="frame" x="20" y="289" width="560" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -351,6 +351,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="AButton" destination="QuM-Sw-0pw" id="QC3-Zw-c52"/>
                         <outlet property="guesses" destination="X3u-tz-Euh" id="i3w-59-mks"/>
                     </connections>
                 </viewController>
