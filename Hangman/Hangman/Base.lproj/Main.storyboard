@@ -378,6 +378,7 @@
                         <outlet property="YButton" destination="WdS-t4-V58" id="1DD-ep-2Or"/>
                         <outlet property="ZButton" destination="xla-1O-3Yt" id="GgW-WV-80U"/>
                         <outlet property="guesses" destination="X3u-tz-Euh" id="i3w-59-mks"/>
+                        <outlet property="hangmanImage" destination="3Bz-ag-spM" id="PjP-QA-EGh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7b-6V-uc9" userLabel="First Responder" sceneMemberID="firstResponder"/>
