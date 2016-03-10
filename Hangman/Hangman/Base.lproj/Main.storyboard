@@ -352,6 +352,31 @@
                     </view>
                     <connections>
                         <outlet property="AButton" destination="QuM-Sw-0pw" id="QC3-Zw-c52"/>
+                        <outlet property="BButton" destination="2cs-rK-KBb" id="s9F-74-hfh"/>
+                        <outlet property="CButton" destination="0b1-Tb-y7h" id="MJb-TM-Muc"/>
+                        <outlet property="DButton" destination="CfC-0X-rbY" id="ZkI-2S-s1R"/>
+                        <outlet property="EButton" destination="qr7-1U-SfV" id="Xls-8G-mlP"/>
+                        <outlet property="FButton" destination="Gub-al-NHx" id="5Hq-gD-rdD"/>
+                        <outlet property="GButton" destination="fEG-H3-Znv" id="Pwo-Dh-a1Z"/>
+                        <outlet property="HButton" destination="QGR-Oz-EBd" id="2vT-CJ-Nft"/>
+                        <outlet property="IButton" destination="Sb4-5W-cq3" id="e6r-SU-Jcc"/>
+                        <outlet property="JButton" destination="Uou-T7-jl4" id="nkC-4K-RrW"/>
+                        <outlet property="KButton" destination="xLR-9m-t4x" id="dI0-rZ-opM"/>
+                        <outlet property="LButton" destination="Vyb-Id-EXG" id="IEE-En-TqY"/>
+                        <outlet property="MButton" destination="O6u-Kh-L2J" id="FTw-0s-cV7"/>
+                        <outlet property="NButton" destination="B0s-Qk-yhq" id="tyd-7A-CiL"/>
+                        <outlet property="OButton" destination="vlc-f7-hPR" id="ekU-kO-NXw"/>
+                        <outlet property="PButton" destination="8tu-Fe-7a5" id="w9U-Kx-ITY"/>
+                        <outlet property="QButton" destination="4Yr-PW-zmH" id="Qmz-i9-1yB"/>
+                        <outlet property="RButton" destination="GxZ-bO-rek" id="Cc3-pC-SPO"/>
+                        <outlet property="SButton" destination="Ulx-af-k6y" id="Mfy-SM-fOz"/>
+                        <outlet property="TButton" destination="iOl-gE-36N" id="lJl-tc-gpH"/>
+                        <outlet property="UButton" destination="Bjq-S3-k9p" id="OLY-Xf-vVS"/>
+                        <outlet property="VButton" destination="pbr-Gi-iqf" id="H65-er-Ir6"/>
+                        <outlet property="WButton" destination="WD5-aj-moN" id="M1y-53-0b4"/>
+                        <outlet property="XButton" destination="hyr-jy-Fcs" id="R7Q-b4-rc2"/>
+                        <outlet property="YButton" destination="WdS-t4-V58" id="1DD-ep-2Or"/>
+                        <outlet property="ZButton" destination="xla-1O-3Yt" id="GgW-WV-80U"/>
                         <outlet property="guesses" destination="X3u-tz-Euh" id="i3w-59-mks"/>
                     </connections>
                 </viewController>
