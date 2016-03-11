@@ -11,11 +11,13 @@ import UIKit
 class GameViewController: UIViewController {
 
     @IBOutlet weak var guesses: UILabel!
+    @IBOutlet weak var incorrectGuessesLabel: UILabel!
     @IBOutlet weak var hangmanImage: UIImageView!
     var phrase = ""
     var currentGameState = ""
     var charactersUsed: [String] = []
     var wrongCharactersUsed: [String] = []
+    var incorrectGuessesText = "Incorrect Guesses: "
     
     @IBOutlet weak var AButton: UIButton!
     @IBOutlet weak var BButton: UIButton!
@@ -43,7 +45,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var XButton: UIButton!
     @IBOutlet weak var YButton: UIButton!
     @IBOutlet weak var ZButton: UIButton!
-    lazy var buttons: [UIButton] = [self.AButton, self.BButton, self.CButton, self.DButton]
+    @IBOutlet weak var startOverButton: UIButton!
+    lazy var buttons: [UIButton] = [self.AButton, self.BButton, self.CButton, self.DButton, self.EButton, self.FButton, self.GButton, self.HButton, self.IButton, self.JButton, self.KButton, self.LButton, self.MButton, self.NButton, self.OButton, self.PButton, self.QButton, self.RButton, self.SButton, self.TButton, self.UButton, self.VButton, self.WButton, self.XButton, self.YButton, self.ZButton]
     
     
     override func viewDidLoad() {
@@ -54,8 +57,8 @@ class GameViewController: UIViewController {
         phrase = hangmanPhrases.getRandomPhrase()
         print(phrase)
         self.guesses.text = phrase
-        guesses.font = UIFont.systemFontOfSize(24)
-        setUpCharacterGuessing()
+        guesses.font = UIFont.systemFontOfSize(16)
+        setUpButtons()
         setGuessState()
     }
 
@@ -82,6 +85,8 @@ class GameViewController: UIViewController {
     func newCharacterGuessed(character: String) {
         if isWrongGuess(character) {
             wrongCharactersUsed.append(character)
+            incorrectGuessesText += (" " + character)
+            incorrectGuessesLabel.text = incorrectGuessesText
             if wrongCharactersUsed.count == 1 {
                 hangmanImage.image = UIImage(named: "hangman2.gif")
             } else if wrongCharactersUsed.count == 2 {
@@ -94,25 +99,7 @@ class GameViewController: UIViewController {
                 hangmanImage.image = UIImage(named: "hangman6.gif")
             } else if wrongCharactersUsed.count == 6 {
                 hangmanImage.image = UIImage(named: "hangman7.gif")
-                var alert = UIAlertController(title: "Game Over :(", message: "Nice try!", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                var newGameAction = UIAlertAction(title: "New Game", style: UIAlertActionStyle.Default) {
-                    UIAlertAction in
-                    NSLog("OK Pressed")
-                }
-                var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {
-                    UIAlertAction in
-                    
-                    for button in self.buttons {
-                        button.enabled = false
-                    }
-                    NSLog("Cancel Pressed")
-                }
-                
-                
-                alert.addAction(newGameAction)
-                alert.addAction(cancelAction)
-                self.presentViewController(alert, animated: true, completion: nil)
+                declareLose()
             }
         } else {
             var guessState = ""
@@ -128,9 +115,65 @@ class GameViewController: UIViewController {
             print(guessState)
             currentGameState = guessState
             self.guesses.text = currentGameState
+            if hasPlayerWon() {
+                declareWin()
+            }
         }
-        print(charactersUsed)
-
+    }
+    
+    func declareWin() {
+        disableFurtherGuessing()
+        let alert = UIAlertController(title: "You win!", message: ":)", preferredStyle: UIAlertControllerStyle.Alert)
+        let newGameAction = UIAlertAction(title: "New Game", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            self.startOver()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {
+            UIAlertAction in
+            NSLog("Cancel Pressed")
+        }
+        alert.addAction(newGameAction)
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func declareLose() {
+        disableFurtherGuessing()
+        let alert = UIAlertController(title: "Game Over :(", message: "Nice try!", preferredStyle: UIAlertControllerStyle.Alert)
+        let newGameAction = UIAlertAction(title: "New Game", style: UIAlertActionStyle.Default) {
+                            UIAlertAction in
+                            self.startOver()
+                        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {
+            UIAlertAction in
+            NSLog("Cancel Pressed")
+        }
+        alert.addAction(newGameAction)
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func disableFurtherGuessing() {
+        for button in self.buttons {
+            button.enabled = false
+            button.backgroundColor = UIColor.redColor()
+        }
+    }
+    
+    func enableGuessing() {
+        for button in self.buttons {
+            button.enabled = true
+            button.backgroundColor = UIColor.lightGrayColor()
+        }
+    }
+    
+    func hasPlayerWon() -> Bool {
+        for i in currentGameState.characters {
+            if (i == "-") {
+                return false
+            }
+        }
+        return true
     }
     
     func isWrongGuess(character: String) -> Bool {
@@ -142,7 +185,7 @@ class GameViewController: UIViewController {
         return true
     }
     
-    func setUpCharacterGuessing() {
+    func setUpButtons() {
         AButton.addTarget(self, action: "guessA", forControlEvents: .TouchUpInside)
         BButton.addTarget(self, action: "guessB", forControlEvents: .TouchUpInside)
         CButton.addTarget(self, action: "guessC", forControlEvents: .TouchUpInside)
@@ -169,6 +212,21 @@ class GameViewController: UIViewController {
         XButton.addTarget(self, action: "guessX", forControlEvents: .TouchUpInside)
         YButton.addTarget(self, action: "guessY", forControlEvents: .TouchUpInside)
         ZButton.addTarget(self, action: "guessZ", forControlEvents: .TouchUpInside)
+        startOverButton.addTarget(self, action: "startOver", forControlEvents: .TouchUpInside)
+    }
+    
+    func startOver() {
+        let hangmanPhrases = HangmanPhrases()
+        phrase = hangmanPhrases.getRandomPhrase()
+        print(phrase)
+        setGuessState()
+        enableGuessing()
+        currentGameState = ""
+        charactersUsed = []
+        wrongCharactersUsed = []
+        incorrectGuessesText = "Incorrect Guesses: "
+        incorrectGuessesLabel.text = incorrectGuessesText
+        hangmanImage.image = UIImage(named: "hangman1.gif")
     }
     
     func guessA(){
@@ -352,16 +410,4 @@ class GameViewController: UIViewController {
         ZButton.enabled = false
         ZButton.backgroundColor = UIColor.redColor()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
